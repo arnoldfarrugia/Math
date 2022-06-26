@@ -1,0 +1,96 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+    <title> </title>
+</head>
+<body>
+    
+    <h1>Train your brain with <span class="highlight"><br>Mathematics</span></h1>
+
+    <div class="full-menu">
+        <div>
+            <h3 class="choose-dif">Choose difficulty</h3>
+            <ul class="options-dif hide">
+                <li class="green difficulty green-bg">Easy</li>
+                <li class="yellow difficulty">Medium</li>
+                <li class="red difficulty">Hard</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3 class="choose-arit">Choose arithmetic</h3>
+            <ul class="options-arit hide">
+                <li class="operator">+</li>
+                <li class="operator">-</li>
+                <li class="operator">x</li>
+                <li class="operator">÷</li>
+                <li class="operator chosen">?</li>
+            </ul>
+        </div>
+
+        <div class="dur-menu">
+            <h3 class="choose-dur">Choose duration</h3>
+            <ul class="options-dur hide">
+                <li class="duration">1 min</li>
+                <li class="duration">5 min</li>
+                <li class="duration chosen">Unlimited</li>
+            </ul>
+        </div>
+    
+        <button class="go">Go</button>
+    
+    </div>
+    
+    <div class="min-menu hide">
+        <ul class="show">
+            <li>Difficulty:<ion-icon class="dif-col" name="ellipse"></ion-icon></li>
+            <li>Arithmetic: [ <span class="menu-icon"></span> ]</li>
+            <li class="edit"><ion-icon class="edit-icon" name="settings"></ion-icon></li>
+        </ul>
+
+
+    </div>
+
+    <div class="equation hide">
+
+        <div class="data">
+            <p id="timer"><span class="min">00</span> : <span class="sec">00</span></p>​
+            <p class="scoreTxt">Score: <span class="score"></span></p>
+        </div>        
+
+        <div class="sum">
+            <p><span class="num1"></span> <span class="symbol"></span> <span class="num2"></span> = </p>
+        
+            <form id="sum">
+                <input class="answer" name="number" type="number" autocomplete="off" autofocus>
+                <button class="submit"><ion-icon name="checkmark-circle"></ion-icon></button>
+            </form>
+        </div>
+
+        <p class="result"></p>
+        
+    </div>
+
+    <div class="review hide">
+
+        <h2>Your score is:</h2>
+        <p class="final-score"></p>
+        <ion-icon class="restart" name="refresh"></ion-icon>
+    </div>
+    
+    
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="index.js"></script>
+    <!-- ionIcons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

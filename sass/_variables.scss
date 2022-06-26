@@ -1,0 +1,65 @@
+// ----- Fonts -----
+$font: "Quicksand", sans-serif;
+
+// // ----- sizes -----
+// $xl: 60px;
+// $lrg: 55px;
+// $medium: 45px;
+// $text: 28px;
+// $small: 25px;
+// $xs: 20px;
+// $s-active: 25px;
+// $xs-active: 20px;
+
+// ----- Colours -----
+$dark: #3D405B;
+$light-bg: #e4e0cb;
+$light: #f4f1de;
+$green: #81B29A;
+$yellow: #F2CC8F;
+$red: #E07A5F;
+
+
+// // Portfolio
+// $card-size: 280px;
+// $card-size-m: 250px;
+
+// // Screen Size
+// $screen: 1366px;
+
+// // Breakpoints
+// $bp_desktop: "(min-width: 1025px)";
+// $bp_laptop: "(max-width: 1024px)";
+// $bp_tablet: "(max-width: 850px)";
+// $bp_mobile: "(max-width: 450px)";
+// $bp_xs: "(max-width: 350px)";
+
+
+// // ----- Mixins -----
+
+// Background pattern
+// @mixin bg-pattern {
+//     background-color: #F4F1DE;
+//     opacity: 1;
+//     background-image:  linear-gradient(rgba(242, 204, 143, 0.2) 2px, transparent 2px), linear-gradient(90deg, rgba(242, 204, 143, 0.2) 2px, transparent 2px), linear-gradient(rgba(242, 204, 143, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(242, 204, 143, 0.2) 1px, #F4F1DE 1px);
+//     background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+//     background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+// }
+
+// @mixin icon-size {
+//     width: 65px;
+//     height: 65px;
+//     background-size: contain;
+// }
+
+// @mixin nav-select {
+//     font-family: $highlight-font;
+//     color: $primary;
+//     font-size: $s-active;
+// }
+
+// @mixin inactive {
+//     color: $background;
+//     pointer-events: none;
+//     opacity: 0.3;
+// } 

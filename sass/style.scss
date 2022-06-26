@@ -1,0 +1,306 @@
+@import"reset";
+@import "variables";
+
+body {
+    font-family: $font;
+    background-color: $light;
+    color: $dark;
+    font-size: 1em;
+}
+
+h1 {
+    text-align: center;
+    line-height: 1.2em;
+    padding: 30px 0 20px 0;
+    font-size: 3em;
+}
+
+.highlight {
+    font-weight: 800;
+    color: $red;
+}
+
+h3 {
+    display: flex;
+    max-width: 300px;
+    justify-content: center;
+    margin: 10px auto;
+    font-size: 1.4em;
+    padding: 10px 5px;
+    border: 2px solid $dark;
+    border-radius: 10px;
+
+    &:hover {
+        cursor: pointer;
+        border-color: $green;
+        background-color: $yellow;
+    }
+
+}
+
+.full-menu {
+    margin-top: 30px;
+}
+
+.min-menu {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: $light-bg;
+    border-radius: 0 0 8px 8px;
+
+    ul {
+        max-width: 500px;
+        justify-content: space-between;
+    }
+
+    li {
+        padding: 5px 20px;
+    }
+
+}
+
+.dif-col {
+    position: absolute;
+    margin-left: 5px;
+    font-size: 1.5em;
+
+    &.easy {
+        color: $green;
+    }
+    &.medium {
+        color: $yellow;
+    }
+    &.hard {
+        color: $red;
+    }
+}
+
+.edit {
+    margin-right: 25px;
+}
+
+.edit-icon {
+    font-size: 1.5em;
+    position: absolute;
+    
+    &:hover {
+        cursor: pointer;
+        color: $red;
+    }
+}
+
+ul {
+    max-width: 300px;
+    margin: 20px auto;
+    list-style: none;
+    justify-content: space-evenly;
+}
+
+li {
+    font-size: 1.2em;
+    font-weight: 600;
+
+    &.difficulty {
+        padding: 5px 10px;
+        &:hover {
+            cursor: pointer;
+            border-radius: 15px;
+
+            &.green {
+                background-color: $green;
+            }
+
+            &.yellow {
+                background-color: $yellow;
+            }
+
+            &.red {
+                background-color: $red;
+            }       
+        }
+    } 
+
+    &.operator {
+        padding: 5px 15px;
+        &:hover {
+            padding: 0 10px;
+            cursor: pointer;
+            border-radius: 50px;
+            border: 5px solid $red;
+        }
+    } 
+
+    &.duration {
+        padding: 5px 10px;
+        &:hover {
+            cursor: pointer;
+            border-bottom: 4px solid $yellow; 
+        }
+    }
+    
+}
+
+.green-bg {
+    border-radius: 15px;
+    background-color: $green;
+}
+
+.yellow-bg {
+    border-radius: 15px;
+    background-color: $yellow;
+}
+
+.red-bg {
+    border-radius: 15px;
+    background-color: $red;
+}
+
+.operator {
+    &.chosen {
+        padding: 0 10px;
+        border-radius: 50px;
+        border: 5px solid $red;
+    }
+}
+
+.duration {
+    &.chosen {
+        border-bottom: 4px solid $yellow; 
+    }
+}
+.go {
+    display: block;
+    margin: 50px auto;
+    background-color: $green;
+    padding: 15px 20px;
+    border-radius: 50%;
+    font-size: 2em;
+    color: $light;
+    font-weight: 600;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+        padding: 17px 22px;
+    }
+}
+
+.sum {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    margin: 20vh 0;
+}
+
+.answer {
+    max-width: 80px;
+    margin-left: 15px;
+    border-radius: 10px;
+    color: $dark;
+    background-color: $light;
+    border: 1px solid $dark;
+    text-align: center;
+    position: absolute;
+    padding: 0 5px;
+}
+
+.submit {
+    margin-left: 95px;
+    background-color: $light;
+    border: none;
+    color: $yellow;
+    font-size: 1.5em;
+
+    &:hover {
+        cursor: pointer;
+        color: $green;
+    }
+}
+
+.data {
+    display: flex;
+    max-width: 500px;
+    justify-content: space-between;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.scoreTxt {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.score {
+    font-weight: 600;
+    color:$green;
+    padding-right: 20px;
+}
+
+.result {
+    text-align: center;
+    font-size: 1.7em;
+    font-weight: 500;
+    font-style: italic;
+}
+
+#timer {
+    padding-left: 20px;
+    font-size: 1.4em;
+    text-align: center;
+}
+
+.review {
+    text-align: center;
+    margin-top: 10vh;
+    
+    h2 {
+        font-size: 2em;
+    }
+
+    .final-score {
+        font-size: 3em;
+        color: $green;
+        font-weight: 600;
+    }
+
+    .restart {
+        position: absolute;
+        bottom: 50px;
+        right: calc(50vw - 30px);
+        font-size: 2.5em;
+        color: $yellow;
+        padding: 10px;
+        background-color: $dark;
+        border-radius: 100%;
+        transition-duration: 2s;
+
+
+        &:hover {
+            cursor: pointer;
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+ion-icon:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
