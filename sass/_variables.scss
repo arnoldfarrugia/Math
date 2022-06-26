@@ -27,12 +27,12 @@ $red: #E07A5F;
 // // Screen Size
 // $screen: 1366px;
 
-// // Breakpoints
-// $bp_desktop: "(min-width: 1025px)";
-// $bp_laptop: "(max-width: 1024px)";
-// $bp_tablet: "(max-width: 850px)";
-// $bp_mobile: "(max-width: 450px)";
-// $bp_xs: "(max-width: 350px)";
+// Breakpoints
+$bp_desktop: "(min-width: 1025px)";
+$bp_laptop: "(max-width: 1024px)";
+$bp_tablet: "(max-width: 850px)";
+$bp_mobile: "(max-width: 450px)";
+$bp_xs: "(max-width: 350px)";
 
 
 // // ----- Mixins -----

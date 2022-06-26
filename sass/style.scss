@@ -64,13 +64,13 @@ h3 {
     margin-left: 5px;
     font-size: 1.5em;
 
-    &.easy {
+    &.Easy {
         color: $green;
     }
-    &.medium {
+    &.Medium {
         color: $yellow;
     }
-    &.hard {
+    &.Hard {
         color: $red;
     }
 }
@@ -186,32 +186,33 @@ li {
 }
 
 .sum {
-    text-align: center;
+    max-width: 500px;
     font-size: 2.5em;
     font-weight: 600;
     display: flex;
     justify-content: center;
-    margin: 20vh 0;
+    align-items: baseline;
+    margin: 80px auto;
 }
 
 .answer {
-    max-width: 80px;
+    width: 60px;
     margin-left: 15px;
     border-radius: 10px;
     color: $dark;
     background-color: $light;
     border: 1px solid $dark;
     text-align: center;
-    position: absolute;
     padding: 0 5px;
 }
 
 .submit {
-    margin-left: 95px;
     background-color: $light;
     border: none;
     color: $yellow;
     font-size: 1.5em;
+    position: relative;
+    top: 15px;
 
     &:hover {
         cursor: pointer;
@@ -239,10 +240,14 @@ li {
 }
 
 .result {
+    width: 300px;
     text-align: center;
     font-size: 1.7em;
     font-weight: 500;
     font-style: italic;
+    position: absolute;
+    top: 470px;
+    left: calc(50% - 150px);
 }
 
 #timer {
@@ -264,23 +269,48 @@ li {
         color: $green;
         font-weight: 600;
     }
+}
 
-    .restart {
-        position: absolute;
-        bottom: 50px;
-        right: calc(50vw - 30px);
-        font-size: 2.5em;
-        color: $yellow;
-        padding: 10px;
-        background-color: $dark;
-        border-radius: 100%;
-        transition-duration: 2s;
+.restart {
+    position: absolute;
+    bottom: 50px;
+    right: calc(50vw - 30px);
+    font-size: 2.5em;
+    color: $yellow;
+    padding: 10px;
+    background-color: $dark;
+    border-radius: 100%;
+    transition-duration: 2s;
 
+
+    &:hover {
+        cursor: pointer;
+        transform: rotate(180deg);
+    }
+}
+
+.numbers {
+    display: none;
+    margin: 0 auto;
+    border-spacing: 0px;
+
+    td {
+        font-size: 3em;
+        text-align: center;
+        font-weight: 500;
+        border: 1px solid $dark;
+        width: 150px;
+        height: 80px;
 
         &:hover {
             cursor: pointer;
-            transform: rotate(180deg);
         }
+    }
+}
+
+@media #{$bp_tablet} {
+    .numbers {
+        display: table;
     }
 }
 

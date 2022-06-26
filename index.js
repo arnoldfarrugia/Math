@@ -7,6 +7,22 @@ var difficulty = "Easy";
 var operator = "?";
 var feedback = "";
 
+var value = [];
+
+$(".num").click(function() {
+    value.push($(this).text());
+    $(".answer").val(value.join(""));
+});
+
+$(".del").click(function() {
+    value.pop();
+    $(".answer").val(value.join(""));
+});
+
+$(".submit").click(function() {
+    value = [];
+});
+
 // ---- Timer ----
 timer = function() {
     setInterval(updateDisplay, 1000); // every second call updateDisplay
@@ -39,7 +55,7 @@ timer = function() {
             }
         }
     }
-}
+};
 
 // ---- Menu ----
 $(".choose-dif").click(function() {
@@ -320,6 +336,9 @@ $(".go").click(function() {
 
     // Show the sum section
     $(".equation").removeClass("hide");
+
+    // Show the numbers (on mobile)
+    $(".numbers").removeClass("hide");
 
     // Check if timer is running and start Timer
     let s = $(".sec").text();
