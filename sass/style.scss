@@ -59,6 +59,17 @@ h3 {
 
 }
 
+.shuffle {
+    padding-top: 5px;
+}
+
+.shuffle-menu {
+    position: relative;
+    top: 6px;
+    font-size: 1.2em;
+
+}
+
 .dif-col {
     position: absolute;
     margin-left: 5px;
@@ -90,10 +101,12 @@ h3 {
 }
 
 ul {
+    display: flex;
     max-width: 300px;
-    margin: 20px auto;
+    margin: 0 auto;
     list-style: none;
     justify-content: space-evenly;
+    height: 40px;
 }
 
 li {
@@ -121,9 +134,10 @@ li {
     } 
 
     &.operator {
-        width: 22px;
-        height: 22px;
+        width: 30px;
+        height: 30px;
         text-align: center;
+        border: 2px solid $light;
         &:hover {
             cursor: pointer;
             border-radius: 100%;
@@ -172,8 +186,8 @@ li {
     display: block;
     margin: 50px auto;
     background-color: $green;
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
     border-radius: 100%;
     font-size: 2em;
     color: $light;
@@ -182,7 +196,7 @@ li {
 
     &:hover {
         cursor: pointer;
-        padding: 17px 22px;
+        background-color: $dark;
     }
 }
 
@@ -197,7 +211,7 @@ li {
 }
 
 .answer {
-    width: 60px;
+    width: 70px;
     margin-left: 15px;
     border-radius: 10px;
     color: $dark;
@@ -241,13 +255,11 @@ li {
 }
 
 .result {
-    width: 300px;
     text-align: center;
     font-size: 1.7em;
     font-weight: 500;
     font-style: italic;
     height: 20px;
-    left: calc(50% - 150px);
 }
 
 #timer {
@@ -293,19 +305,100 @@ li {
     display: none;
     margin: 0 auto;
     border-spacing: 0px;
-    margin-top: 60px;
+    position: absolute;
+    bottom: 0;
 
     td {
         font-size: 2.5em;
         text-align: center;
         font-weight: 500;
         border: 1px solid $dark;
-        width: 120px;
+        width: 33vw;
         height: 70px;
 
         &:hover {
             cursor: pointer;
         }
+    }
+}
+
+.icons {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.icon {
+    color: $dark;
+    font-size: 2.5em;
+    margin: 0 20px;
+
+    &:hover {
+        cursor: pointer;
+    &.quit {
+        color: $red;
+    } 
+    &.info {
+        color: $green;
+    }
+    }
+}
+
+.about {
+    display: none;
+
+    h4 {
+        text-align: center;
+    }
+    
+    .paragraph {
+        margin: 20px 0;
+    }
+
+    a {
+        font-weight: bold;
+        color: $green;
+    }
+
+    .center {
+        text-align: center;
+        padding-top: 20px;
+    }
+
+    .content {
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%);
+        width: 400px;
+        height: 250px;
+        padding: 20px;
+        background-color: $light;
+        border-radius: 30px;
+        z-index: 10;
+
+        .close {
+            position: absolute;
+            top: -55px;
+            right: -55px;
+            color: $red;
+            font-size: 50px;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+        }
+    }
+
+    &::before {
+        content: "";
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: $dark;
+        z-index: 5;
     }
 }
 
@@ -319,11 +412,48 @@ li {
     body {
         font-size: 0.7em;
     }
+    
     h1 {
         font-size: 2em;
     }
+
+    ul {
+        height: 32px;
+    }
+
+    .operator {
+        font-size: 1.7em;
+    }
+
+    .shuffle-menu {
+        top: 4px;
+    }
+
     .sum {
         margin: 10px auto;
+    }
+
+    .submit {
+        font-size: 2em;
+        top: 18px;
+    }
+
+    .go {
+        margin: 30px auto;
+    }
+
+    .about {
+        .content {
+            width: 250px;
+            height: 250px;
+            
+            .close {
+                top: -55;
+                right: 0;
+                color: $red;
+                font-size: 50px;
+            }
+        }
     }
 }
 
@@ -331,10 +461,7 @@ li {
     display: none;
 }
 
-.show {
-    display: flex;
-}
-
+// Remove arrows from number input
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

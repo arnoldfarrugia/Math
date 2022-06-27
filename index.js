@@ -7,6 +7,9 @@ var difficulty = "Easy";
 var operator = "?";
 var feedback = "";
 
+var pauseMin = "";
+var pauseSec = "";
+
 // ---- Numpad ----
 var value = [];
 
@@ -62,18 +65,15 @@ timer = function() {
 
 // ---- Menu ----
 $(".choose-dif").click(function() {
-    $(".options-dif").removeClass("hide");
-    $(".options-dif").addClass("show");
+    $(".options-dif").toggle();
 });
 
 $(".choose-arit").click(function() {
-    $(".options-arit").removeClass("hide");
-    $(".options-arit").addClass("show");
+    $(".options-arit").toggle();
 });
 
 $(".choose-dur").click(function() {
-    $(".options-dur").removeClass("hide");
-    $(".options-dur").addClass("show");
+    $(".options-dur").toggle();
 });
 
 // ---- Choose difficulty
@@ -103,9 +103,9 @@ $(".difficulty").click(function() {
 
 // ---- Choose operator
 $(".operator").click(function() {
-    operator = $(this).text();
-    $(".operator").removeClass("chosen")
-    $(this).addClass("chosen")
+    operator = $(this).attr("id");
+    $(".operator").removeClass("chosen");
+    $(this).addClass("chosen");
 });
 
 // Choose duration
@@ -123,7 +123,12 @@ $(".duration").click(function() {
 
 // ---- Edit settings ---- 
 $(".edit").click(function() {
-    console.log("clicked");
+    pauseMin = $(".min").text();
+    pauseSec = $(".sec").text();
+
+    console.log("min: " + pauseMin + " sec: " + pauseSec);
+
+    $("h1").removeClass("hide");
     $(".equation").addClass("hide");
     $(".full-menu").removeClass("hide");
     $(".dur-menu").addClass("hide");
@@ -134,7 +139,6 @@ $(".edit").click(function() {
 // ---- Random feedback generator
 randomPraise = function() {
     z = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
-    console.log(z);
 
     if (z == 1) {
         feedback = "Amazing!"
@@ -225,7 +229,7 @@ randomGame = function () {
     // Randomly select an operator
     if (operator == "?") {
         var sign = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
-        console.log(sign);
+
         if (sign == 1) {
             arithmetic = "+";
         } else if (sign == 2) {
@@ -331,12 +335,21 @@ $(".go").click(function() {
     // Hide full-menu & show min-menu
     $(".full-menu").addClass("hide");
     $(".min-menu").removeClass("hide");
+    $(".quit").removeClass("hide");
+
+    // Hide title
+    $("h1").addClass("hide");
 
     // Change menu difficulty colour
     $(".dif-col").addClass(difficulty);
 
     // Change menu arithmetic symbol
-    $(".menu-icon").text(operator);
+    if (operator == "?") {
+        $(".menu-icon").html('<ion-icon class = "shuffle-menu" name="shuffle"></ion-icon>');
+    } else {
+        $(".menu-icon").text(operator);
+    }
+    
 
     // Show the sum section
     $(".equation").removeClass("hide");
@@ -350,6 +363,9 @@ $(".go").click(function() {
 
     if (s == 00 && m == 00) {
         timer();
+    } else {
+        $(".sec").text(pauseSec);
+        $(".min").text(pauseMin);
     }
 
     // Check if "Random" operator was selected and start game
@@ -367,6 +383,28 @@ $(".restart").click(function () {
     location.reload();
 });
 
+// ---- Show Lightbox - ABOUT
+$(".info").click(function () {
+    $(".about").css("display", "block");
+    // Disable page scrolling
+    $("html, body").css("overflow", "hidden");
 
+    $(".close").click(function () {
+        $(".about").css("display", "none");
+        // Enable page scrolling
+        $("html, body").css("overflow", "auto");
+    });
 
+    $(document).on("keyup", function (e) {
+        if (e.key == "Escape") {
+            $(".about").css("display", "none");
+            $("html, body").css("overflow", "auto");
+        }
+    });
+});
+
+// ---- Quit Game
+$(".quit").click(function () {
+    location.reload();
+});
 
