@@ -7,6 +7,7 @@ var difficulty = "Easy";
 var operator = "?";
 var feedback = "";
 
+// ---- Numpad ----
 var value = [];
 
 $(".num").click(function() {
@@ -43,6 +44,7 @@ timer = function() {
             if (minutes == 01) {
                 $(".equation").addClass("hide");
                 $(".min-menu").addClass("hide");
+                $(".numbers").addClass("hide");
                 $(".review").removeClass("hide");
                 $(".final-score").text(score);
             }    
@@ -50,6 +52,7 @@ timer = function() {
             if (minutes == 05) {
                 $(".equation").addClass("hide");
                 $(".min-menu").addClass("hide");
+                $(".numbers").addClass("hide");
                 $(".review").removeClass("hide");
                 $(".final-score").text(score);
             }
@@ -124,6 +127,7 @@ $(".edit").click(function() {
     $(".equation").addClass("hide");
     $(".full-menu").removeClass("hide");
     $(".dur-menu").addClass("hide");
+    $(".numbers").addClass("hide");
     $(".min-menu").addClass("hide");
 });
 

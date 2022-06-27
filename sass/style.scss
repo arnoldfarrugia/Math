@@ -32,7 +32,7 @@ h3 {
 
     &:hover {
         cursor: pointer;
-        border-color: $green;
+        border-color: $yellow;
         background-color: $yellow;
     }
 
@@ -121,12 +121,13 @@ li {
     } 
 
     &.operator {
-        padding: 5px 15px;
+        width: 22px;
+        height: 22px;
+        text-align: center;
         &:hover {
-            padding: 0 10px;
             cursor: pointer;
-            border-radius: 50px;
-            border: 5px solid $red;
+            border-radius: 100%;
+            border: 2px solid $red;
         }
     } 
 
@@ -157,9 +158,8 @@ li {
 
 .operator {
     &.chosen {
-        padding: 0 10px;
-        border-radius: 50px;
-        border: 5px solid $red;
+        border-radius: 100%;
+        border: 2px solid $red;
     }
 }
 
@@ -172,8 +172,9 @@ li {
     display: block;
     margin: 50px auto;
     background-color: $green;
-    padding: 15px 20px;
-    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
     font-size: 2em;
     color: $light;
     font-weight: 600;
@@ -245,8 +246,7 @@ li {
     font-size: 1.7em;
     font-weight: 500;
     font-style: italic;
-    position: absolute;
-    top: 470px;
+    height: 20px;
     left: calc(50% - 150px);
 }
 
@@ -293,14 +293,15 @@ li {
     display: none;
     margin: 0 auto;
     border-spacing: 0px;
+    margin-top: 60px;
 
     td {
-        font-size: 3em;
+        font-size: 2.5em;
         text-align: center;
         font-weight: 500;
         border: 1px solid $dark;
-        width: 150px;
-        height: 80px;
+        width: 120px;
+        height: 70px;
 
         &:hover {
             cursor: pointer;
@@ -311,6 +312,18 @@ li {
 @media #{$bp_tablet} {
     .numbers {
         display: table;
+    }
+}
+
+@media #{$bp_mobile} {
+    body {
+        font-size: 0.7em;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    .sum {
+        margin: 10px auto;
     }
 }
 
