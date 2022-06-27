@@ -158,6 +158,8 @@ randomPraise = function() {
 startGame = function () {
     $(".score").text(score);
 
+    $(".symbol").text(operator);
+
     // ---- Set 2 random numbers based on difficulty chosen
     var a = Math.floor(Math.random() * (max - min + 1)) + min;
     var b = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -370,10 +372,9 @@ $(".go").click(function() {
 
     // Check if "Random" operator was selected and start game
     if (operator == "?") {
-        randomGame()
+        randomGame();
     } else {
         startGame();
-        $(".symbol").text(operator);
     }
 });
 
