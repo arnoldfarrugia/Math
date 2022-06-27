@@ -158,8 +158,6 @@ randomPraise = function() {
 startGame = function () {
     $(".score").text(score);
 
-    $(".symbol").text(operator);
-
     // ---- Set 2 random numbers based on difficulty chosen
     var a = Math.floor(Math.random() * (max - min + 1)) + min;
     var b = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -182,6 +180,8 @@ startGame = function () {
         $(".num2").text(b);
     }
 
+    $(".symbol").text(operator);
+    
     // ---- Take the answer
     $("#sum").submit(function (event) {
         event.preventDefault();
@@ -213,7 +213,7 @@ startGame = function () {
             setTimeout(function() {
                 $(".answer").val("");
                 $(".result").text("");
-                startGame()
+                startGame();
             }, 800);
 
         } else {
