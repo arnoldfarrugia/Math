@@ -2,7 +2,8 @@
 var score = 0;
 var min = 1;
 var max = 20;
-duration = 0;
+durationMin = 00;
+durationSec = 00;
 var difficulty = "Easy";
 var operator = "?";
 var feedback = "";
@@ -32,32 +33,33 @@ timer = function() {
     setInterval(updateDisplay, 1000); // every second call updateDisplay
 
     function updateDisplay(){
-        var minutes = parseInt($(".min").text(), 10);
-        var seconds = parseInt($(".sec").text(), 10);
-        seconds++;
-        $(".sec").text(seconds.toLocaleString(undefined, {minimumIntegerDigits: 2}));
+        var minutes = parseInt($(".min").text());
+        var seconds = parseInt($(".sec").text());
 
-        if (seconds == 60) {
-            minutes++;
-            $(".sec").text("00");        
-            $(".min").text(minutes.toLocaleString(undefined, {minimumIntegerDigits: 2}));        
-        }
+        if (durationSec == 59) {
+            
+            seconds = seconds - 1;
+            $(".sec").text(seconds.toLocaleString(undefined, {minimumIntegerDigits: 2}));
 
-        if (duration == 01) {
-            if (minutes == 01) {
+            if (seconds == 00 && minutes > 0) {
+                minutes = minutes - 1;
+                $(".sec").text("59");        
+                $(".min").text(minutes.toLocaleString(undefined, {minimumIntegerDigits: 2}));        
+            } else if  (seconds == 00 && minutes == 00) {
                 $(".equation").addClass("hide");
                 $(".min-menu").addClass("hide");
                 $(".numbers").addClass("hide");
                 $(".review").removeClass("hide");
                 $(".final-score").text(score);
             }    
-        } else if (duration == 05) {
-            if (minutes == 05) {
-                $(".equation").addClass("hide");
-                $(".min-menu").addClass("hide");
-                $(".numbers").addClass("hide");
-                $(".review").removeClass("hide");
-                $(".final-score").text(score);
+        } else {
+            seconds++;
+            $(".sec").text(seconds.toLocaleString(undefined, {minimumIntegerDigits: 2}));
+
+            if (seconds == 60) {
+                minutes++;
+                $(".sec").text("00");        
+                $(".min").text(minutes.toLocaleString(undefined, {minimumIntegerDigits: 2}));        
             }
         }
     }
@@ -112,9 +114,15 @@ $(".operator").click(function() {
 $(".duration").click(function() {
     var time = $(this).text();
     if (time == "1 min") {
-        duration = 01;
+        durationMin = 00;
+        durationSec = 59;
+        $(".min").text("00");     
+        $(".sec").text("59");        
     } else if (time == "5 min") {
-        duration = 05;
+        durationMin = 05;
+        durationSec = 59;
+        $(".min").text("05");     
+        $(".sec").text("59");
     }
 
     $(".duration").removeClass("chosen")
@@ -363,7 +371,7 @@ $(".go").click(function() {
     let s = $(".sec").text();
     let m = $(".min").text();
 
-    if (s == 00 && m == 00) {
+    if (s == durationSec && m == durationMin) {
         timer();
     } else {
         $(".sec").text(pauseSec);

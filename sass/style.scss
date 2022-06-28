@@ -240,6 +240,7 @@ li {
     max-width: 500px;
     justify-content: space-between;
     margin: 0 auto;
+    padding-top: 5px;
     align-items: center;
 }
 
@@ -304,18 +305,18 @@ li {
 
 .numbers {
     display: none;
-    margin: 0 auto;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
     border-spacing: 0px;
-    position: absolute;
-    bottom: 0;
 
     td {
         font-size: 2.5em;
         text-align: center;
         font-weight: 500;
         border: 1px solid $dark;
-        width: 33vw;
-        height: 70px;
+        width: 120px;
+        height: 80px;
 
         &:hover {
             cursor: pointer;
@@ -348,6 +349,10 @@ li {
     display: none;
 
     h4 {
+        text-align: center;
+    }
+
+    .version {
         text-align: center;
     }
     
@@ -446,7 +451,8 @@ li {
     .about {
         .content {
             width: 250px;
-            height: 250px;
+            height: 260px;
+            font-size: 1.2em;
             
             .close {
                 top: -55;
@@ -454,6 +460,17 @@ li {
                 color: $red;
                 font-size: 50px;
             }
+        }
+    }
+
+    .numbers {
+        margin: 0 auto;
+        position: absolute;
+        bottom: 0;
+    
+        td {
+            width: 33vw;
+            height: 70px;
         }
     }
 }
