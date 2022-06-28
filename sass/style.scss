@@ -463,7 +463,7 @@ li {
     .about {
         .content {
             width: 250px;
-            height: 260px;
+            height: 300px;
             font-size: 1.2em;
             
             .close {
@@ -471,6 +471,11 @@ li {
                 right: 0;
                 color: $red;
                 font-size: 50px;
+            }
+            img {
+                position: relative;
+                top: -10px;
+                margin: 0 auto;
             }
         }
     }
@@ -485,6 +490,18 @@ li {
             height: 70px;
         }
     }
+}
+
+@media #{$bp_xs} {
+    .sum {
+        font-size: 2em;
+    }
+    .submit {
+        font-size: 1.8em;
+        position: relative;
+        top: 10px;
+    }
+
 }
 
 .hide {
