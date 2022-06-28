@@ -494,6 +494,7 @@ li {
 
 @media #{$bp_xs} {
     .sum {
+        min-width: 270px;
         font-size: 2em;
     }
     .submit {
