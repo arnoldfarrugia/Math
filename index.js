@@ -136,7 +136,7 @@ $(".edit").click(function() {
 
     console.log("min: " + pauseMin + " sec: " + pauseSec);
 
-    $("h1").removeClass("hide");
+    $(".logo").removeClass("hide");
     $(".equation").addClass("hide");
     $(".full-menu").removeClass("hide");
     $(".dur-menu").addClass("hide");
@@ -349,6 +349,7 @@ $(".go").click(function() {
 
     // Hide title
     $("h1").addClass("hide");
+    $(".logo").addClass("hide");
 
     // Change menu difficulty colour
     $(".dif-col").addClass(difficulty);
