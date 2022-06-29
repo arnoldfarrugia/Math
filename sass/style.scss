@@ -428,7 +428,7 @@ li {
 
 @media #{$bp_mobile} {
     body {
-        font-size: 0.7em;
+        font-size: 13px;
     }
     
     h1 {
@@ -495,12 +495,15 @@ li {
 @media #{$bp_xs} {
     .sum {
         min-width: 270px;
-        font-size: 2em;
+        font-size: 22px;
+    }
+    .operator {
+        font-size: 22px;
     }
     .submit {
-        font-size: 1.8em;
+        font-size: 40px;
         position: relative;
-        top: 10px;
+        top: 11px;
     }
 
 }
