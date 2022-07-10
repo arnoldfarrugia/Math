@@ -256,19 +256,19 @@ startGame = function () {
 
     // ---- Auto submit result on keyboard
 
-    $(".answer").keydown(function (e) {
-        // If delete is pressed
-        if (e.which == 8) {
-            input.pop();
-        } else {
-            input.push(String.fromCharCode(e.which));
-            answer = input.join("");
+    // $(".answer").keydown(function (e) {
+    //     // If delete is pressed
+    //     if (e.which == 8) {
+    //         input.pop();
+    //     } else {
+    //         input.push(String.fromCharCode(e.which));
+    //         answer = input.join("");
 
-            if (answer == result) {
-                checkAnswer();
-            }
-        }
-    });
+    //         if (answer == result) {
+    //             checkAnswer();
+    //         }
+    //     }
+    // });
 
     // ---- On clicking submit button
     $("#sum").submit(function (event) {
