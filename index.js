@@ -10,23 +10,33 @@ var operator = "?";
 var feedback = "";
 var random = 0;
 
+var paused = false;
 var durationMin = 00;
 var durationSec = 00;
 var pauseMin = "";
 var pauseSec = "";
 
 // ---- Numpad ----
-
 var value = [];
 
 $(".num").click(function () {
     value.push($(this).text());
     $(".answer").val(value.join(""));
+    var input = value.join("");
+
     // Auto-submit answer
-    if (value.join("") == result) {
+    if (input == result) {
         value = [];
-        console.log("Shiny!");
         checkAnswer();
+        // If answer is wrong
+    } else {
+        // Check if the number of digits entered are the same as the answer
+        resLength = result.toString().length;
+        ansLength = input.length;
+        // If yes show "Try Again!"
+        if (resLength == ansLength) {
+            $(".result").text("Try Again!");
+        }
     }
 });
 
@@ -34,10 +44,6 @@ $(".del").click(function () {
     value.pop();
     $(".answer").val(value.join(""));
 });
-
-// $(".submit").click(function () {
-//     value = [];
-// });
 
 // ---- Timer ----
 timer = function () {
@@ -55,7 +61,7 @@ timer = function () {
                 minutes = minutes - 1;
                 $(".sec").text("59");
                 $(".min").text(minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
-            } else if (seconds == 00 && minutes == 00) {
+            } else if (seconds == 00 && minutes == 00 && paused == false) {
                 $(".equation").addClass("hide");
                 $(".min-menu").addClass("hide");
                 $(".numbers").addClass("hide");
@@ -141,6 +147,7 @@ $(".duration").click(function () {
 
 // ---- Edit settings ----
 $(".edit").click(function () {
+    paused = true;
     pauseMin = $(".min").text();
     pauseSec = $(".sec").text();
 
@@ -216,6 +223,7 @@ randomGame = function () {
 
 startGame = function () {
     $(".score").text(score);
+    paused = false;
 
     if (random == 1) {
         randomGame();
