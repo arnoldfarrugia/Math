@@ -341,10 +341,15 @@ $(".go").click(function () {
 
     startGame();
 
-    $(".answer").focus();
-    // $(".answer").focus(function () {
-    //     document.activeElement.blur();
-    // });
+    // Disable onscreen keyboard on when numpad is visible
+    var windowWidth = $(window).width();
+    if (windowWidth < 850) {
+        $(".answer").focus(function () {
+            document.activeElement.blur();
+        });
+    } else {
+        $(".answer").focus();
+    }
 });
 
 // ---- Restart game
