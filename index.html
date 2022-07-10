@@ -1,156 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Train your brain with Mathematics" />
-    <meta property="og:url" content="https://arnoldfarrugia.github.io/Math/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/arnoldfarrugia/Math/main/images/OG-Image.jpg" />
-    <meta property="og:description" content="Math Game: Train your brain by working out Mathematic equations" />
-    <link rel="icon" type="image/x-icon" href="images/favicon.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
-    <title>Math Game</title>
-</head>
-<body>
-    
-    <div class="title">
-        <h1>Train your brain with <span class="highlight"><br>Mathematics</span></h1>
-        <img class="logo" src="images/logo.png" alt="Math Logo">
-    </div>
+    <html>
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta property="og:title" content="Train your brain with Mathematics" />
+            <meta property="og:url" content="https://arnoldfarrugia.github.io/Math/" />
+            <meta property="og:type" content="website" />
+            <meta property="og:image" content="https://raw.githubusercontent.com/arnoldfarrugia/Math/main/images/OG-Image.jpg" />
+            <meta property="og:description" content="Math Game: Train your brain by working out Mathematic equations" />
+            <link rel="icon" type="image/x-icon" href="images/favicon.png" />
+            <link rel="stylesheet" href="css/style.css" />
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+            <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet" />
+            <title>Math Game</title>
+        </head>
+        <body>
+            <div class="title">
+                <h1>
+                    Train your brain with <span class="highlight"><br />Mathematics</span>
+                </h1>
+                <img class="logo" src="images/logo.png" alt="Math Logo" />
+            </div>
 
-    <div class="full-menu">
-        <div>
-            <h3 class="choose-dif">Choose difficulty</h3>
-            <div class="options-dif hide">
-                <ul>
-                    <li class="green difficulty green-bg">Easy</li>
-                    <li class="yellow difficulty">Medium</li>
-                    <li class="red difficulty">Hard</li>
+            <div class="full-menu">
+                <div>
+                    <h3 class="choose-dif">Choose difficulty</h3>
+                    <div class="options-dif hide">
+                        <ul>
+                            <li class="green difficulty green-bg">Easy</li>
+                            <li class="yellow difficulty">Medium</li>
+                            <li class="red difficulty">Hard</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="choose-arit">Choose arithmetic</h3>
+                    <ul class="options-arit hide">
+                        <li class="operator" id="+">+</li>
+                        <li class="operator" id="-">-</li>
+                        <li class="operator" id="x">x</li>
+                        <li class="operator" id="÷">÷</li>
+                        <li class="operator chosen" id="?"><ion-icon class="shuffle" name="shuffle"></ion-icon></li>
+                    </ul>
+                </div>
+
+                <div class="dur-menu">
+                    <h3 class="choose-dur">Choose duration</h3>
+                    <ul class="options-dur hide">
+                        <li class="duration">1 min</li>
+                        <li class="duration">5 min</li>
+                        <li class="duration chosen">Unlimited</li>
+                    </ul>
+                </div>
+
+                <div class="icons">
+                    <ion-icon class="icon quit hide" name="exit"></ion-icon>
+                    <ion-icon class="icon info" name="information-circle"></ion-icon>
+                </div>
+
+                <button class="go">Go</button>
+            </div>
+
+            <div class="min-menu hide">
+                <ul class="show">
+                    <li>Difficulty:<ion-icon class="dif-col" name="ellipse"></ion-icon></li>
+                    <li>Arithmetic: <span class="menu-icon"></span></li>
+                    <li class="edit"><ion-icon class="edit-icon" name="settings"></ion-icon></li>
                 </ul>
             </div>
-        </div>
 
-        <div>
-            <h3 class="choose-arit">Choose arithmetic</h3>
-            <ul class="options-arit hide">
-                <li class="operator" id="+">+</li>
-                <li class="operator" id="-">-</li>
-                <li class="operator" id="x">x</li>
-                <li class="operator" id="÷">÷</li>
-                <li class="operator chosen" id="?"><ion-icon class = "shuffle" name="shuffle"></ion-icon></li>
-            </ul>
-        </div>
+            <div class="equation hide">
+                <div class="data">
+                    <p id="timer"><span class="min">00</span> : <span class="sec">00</span></p>
+                    ​
+                    <p class="scoreTxt">Score: <span class="score"></span></p>
+                </div>
 
-        <div class="dur-menu">
-            <h3 class="choose-dur">Choose duration</h3>
-            <ul class="options-dur hide">
-                <li class="duration">1 min</li>
-                <li class="duration">5 min</li>
-                <li class="duration chosen">Unlimited</li>
-            </ul>
-        </div>
+                <div class="sum">
+                    <p><span class="num1"></span> <span class="symbol"></span> <span class="num2"></span> =</p>
 
-        <div class="icons">
-            <ion-icon class="icon quit hide" name="exit"></ion-icon>
-            <ion-icon class="icon info" name="information-circle"></ion-icon>
-        </div>
-    
-        <button class="go">Go</button>
-    
-    </div>
-    
-    <div class="min-menu hide">
-        <ul class="show">
-            <li>Difficulty:<ion-icon class="dif-col" name="ellipse"></ion-icon></li>
-            <li>Arithmetic: <span class="menu-icon"></span> </li>
-            <li class="edit"><ion-icon class="edit-icon" name="settings"></ion-icon></li>
-        </ul>
+                    <form id="sum">
+                        <input class="answer" name="number" type="number" autofocus autocomplete="off" />
+                        <button class="submit"><ion-icon name="checkmark-circle"></ion-icon></button>
+                    </form>
+                </div>
 
+                <p class="result"></p>
+            </div>
 
-    </div>
-
-    <div class="equation hide">
-
-        <div class="data">
-            <p id="timer"><span class="min">00</span> : <span class="sec">00</span></p>​
-            <p class="scoreTxt">Score: <span class="score"></span></p>
-        </div>        
-
-        <div class="sum">
-            <p><span class="num1"></span> <span class="symbol"></span> <span class="num2"></span> = </p>
-        
-            <form id="sum">
-                <input class="answer" name="number" type="number" autocomplete="off" autofocus>
-                <button class="submit"><ion-icon name="checkmark-circle"></ion-icon></button>
-            </form>
-        </div>
-
-        <p class="result"></p>
-        
-    </div>
-
-    <div>
-        <table class="numbers hide">
-            <tr>
-                <td class="num">1</td>
-                <td class="num">2</td>
-                <td class="num">3</td>
-            </tr>
-            <tr>
-                <td class="num">4</td>
-                <td class="num">5</td>
-                <td class="num">6</td>
-            </tr>
-            <tr>
-                <td class="num">7</td>
-                <td class="num">8</td>
-                <td class="num">9</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="num">0</td>
-                <td class="del"><ion-icon name="arrow-back"></ion-icon></td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="review hide">
-
-        <h2>Your score is:</h2>
-        <p class="final-score"></p>
-        <ion-icon class="restart" name="refresh"></ion-icon>
-    </div>
-
-    <div class="about">
-        <div class="content">
-            <ion-icon class="close" name="close-circle-outline"></ion-icon>
             <div>
-                <img src="images/logo.png" alt="Math Logo">
-                <h4>Train your brain with <span class="highlight">Mathematics</span></h4>
-                <p class="version">Version 1.0</p>
+                <table class="numbers hide">
+                    <tr>
+                        <td class="num">1</td>
+                        <td class="num">2</td>
+                        <td class="num">3</td>
+                    </tr>
+                    <tr>
+                        <td class="num">4</td>
+                        <td class="num">5</td>
+                        <td class="num">6</td>
+                    </tr>
+                    <tr>
+                        <td class="num">7</td>
+                        <td class="num">8</td>
+                        <td class="num">9</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="num">0</td>
+                        <td class="del"><ion-icon name="arrow-back"></ion-icon></td>
+                    </tr>
+                </table>
             </div>
-            <div class="paragraph">
-                <p>Designed and created by <a href="https://arnoldfarrugia.com/" target="_blank" rel="noopener noreferrer">Arnold Farrugia</a>. Logo designed using Adobe Illustrator. Game built using HTML, SASS and jQuery.</p>
-            </div>
-            <div class="paragraph">
-                <p>For feedback or suggestions about how to improve the game contact me on: <a href="mailto:hello@arnoldfarrugia.com">hello@arnoldfarrugia.com</a></p>
-                <p class="center">Enjoy the game! 😉</p>
-            </div>
-            
-        </div>
-    </div>
-    
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="index.js"></script>
-    <!-- ionIcons -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-</body>
+            <div class="review hide">
+                <h2>Your score is:</h2>
+                <p class="final-score"></p>
+                <ion-icon class="restart" name="refresh"></ion-icon>
+            </div>
+
+            <div class="about">
+                <div class="content">
+                    <ion-icon class="close" name="close-circle-outline"></ion-icon>
+                    <div>
+                        <img src="images/logo.png" alt="Math Logo" />
+                        <h4>Train your brain with <span class="highlight">Mathematics</span></h4>
+                        <p class="version">Version 1.0</p>
+                    </div>
+                    <div class="paragraph">
+                        <p>Designed and created by <a href="https://arnoldfarrugia.com/" target="_blank" rel="noopener noreferrer">Arnold Farrugia</a>. Logo designed using Adobe Illustrator. Game built using HTML, SASS and jQuery.</p>
+                    </div>
+                    <div class="paragraph">
+                        <p>For feedback or suggestions about how to improve the game contact me on: <a href="mailto:hello@arnoldfarrugia.com">hello@arnoldfarrugia.com</a></p>
+                        <p class="center">Enjoy the game! 😉</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="index.js"></script>
+            <!-- ionIcons -->
+            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        </body>
+    </html>
 </html>

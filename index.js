@@ -14,78 +14,86 @@ var pauseSec = "";
 // ---- Numpad ----
 var value = [];
 
-$(".num").click(function() {
+$(".num").click(function () {
     value.push($(this).text());
     $(".answer").val(value.join(""));
+    // Read numpad click
+    console.log("A number was clicked");
 });
 
-$(".del").click(function() {
+$(".del").click(function () {
     value.pop();
     $(".answer").val(value.join(""));
 });
 
-$(".submit").click(function() {
+$(".submit").click(function () {
     value = [];
 });
 
+// Read keypress
+$(document).ready(function () {
+    $(".answer").keypress(function (e) {
+        console.log("A key was pressed");
+    });
+});
+
 // ---- Timer ----
-timer = function() {
+timer = function () {
     setInterval(updateDisplay, 1000); // every second call updateDisplay
 
-    function updateDisplay(){
+    function updateDisplay() {
         var minutes = parseInt($(".min").text());
         var seconds = parseInt($(".sec").text());
 
         if (durationSec == 59) {
-            
             seconds = seconds - 1;
-            $(".sec").text(seconds.toLocaleString(undefined, {minimumIntegerDigits: 2}));
+            $(".sec").text(seconds.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
 
             if (seconds == 00 && minutes > 0) {
                 minutes = minutes - 1;
-                $(".sec").text("59");        
-                $(".min").text(minutes.toLocaleString(undefined, {minimumIntegerDigits: 2}));        
-            } else if  (seconds == 00 && minutes == 00) {
+                $(".sec").text("59");
+                $(".min").text(minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+            } else if (seconds == 00 && minutes == 00) {
                 $(".equation").addClass("hide");
                 $(".min-menu").addClass("hide");
                 $(".numbers").addClass("hide");
                 $(".review").removeClass("hide");
                 $(".final-score").text(score);
-            }    
+            }
         } else {
             seconds++;
-            $(".sec").text(seconds.toLocaleString(undefined, {minimumIntegerDigits: 2}));
+            $(".sec").text(seconds.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
 
             if (seconds == 60) {
                 minutes++;
-                $(".sec").text("00");        
-                $(".min").text(minutes.toLocaleString(undefined, {minimumIntegerDigits: 2}));        
+                $(".sec").text("00");
+                $(".min").text(minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
             }
         }
     }
 };
 
 // ---- Menu ----
-$(".choose-dif").click(function() {
+$(".choose-dif").click(function () {
     $(".options-dif").toggle();
 });
 
-$(".choose-arit").click(function() {
+$(".choose-arit").click(function () {
     $(".options-arit").toggle();
 });
 
-$(".choose-dur").click(function() {
+$(".choose-dur").click(function () {
     $(".options-dur").toggle();
 });
 
 // ---- Choose difficulty
-$(".difficulty").click(function() {
+$(".difficulty").click(function () {
     difficulty = $(this).text();
 
     if (difficulty == "Easy") {
         $(".green").addClass("green-bg");
         $(".yellow").removeClass("yellow-bg");
-        $(".red").removeClass("red-bg");   
+        $(".red").removeClass("red-bg");
         min = 1;
         max = 20;
     } else if (difficulty == "Medium") {
@@ -104,33 +112,33 @@ $(".difficulty").click(function() {
 });
 
 // ---- Choose operator
-$(".operator").click(function() {
+$(".operator").click(function () {
     operator = $(this).attr("id");
     $(".operator").removeClass("chosen");
     $(this).addClass("chosen");
 });
 
 // Choose duration
-$(".duration").click(function() {
+$(".duration").click(function () {
     var time = $(this).text();
     if (time == "1 min") {
         durationMin = 00;
         durationSec = 59;
-        $(".min").text("00");     
-        $(".sec").text("59");        
+        $(".min").text("00");
+        $(".sec").text("59");
     } else if (time == "5 min") {
         durationMin = 05;
         durationSec = 59;
-        $(".min").text("05");     
+        $(".min").text("05");
         $(".sec").text("59");
     }
 
-    $(".duration").removeClass("chosen")
-    $(this).addClass("chosen")
+    $(".duration").removeClass("chosen");
+    $(this).addClass("chosen");
 });
 
-// ---- Edit settings ---- 
-$(".edit").click(function() {
+// ---- Edit settings ----
+$(".edit").click(function () {
     pauseMin = $(".min").text();
     pauseSec = $(".sec").text();
 
@@ -145,21 +153,21 @@ $(".edit").click(function() {
 });
 
 // ---- Random feedback generator
-randomPraise = function() {
+randomPraise = function () {
     z = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
 
     if (z == 1) {
-        feedback = "Amazing!"
+        feedback = "Amazing!";
     } else if (z == 2) {
-        feedback = "Oh yeah!"
+        feedback = "Oh yeah!";
     } else if (z == 3) {
-        feedback = "Very nice!"
+        feedback = "Very nice!";
     } else if (z == 4) {
-        feedback = "Incredible!"
+        feedback = "Incredible!";
     } else {
-        feedback = "Groovy!"
+        feedback = "Groovy!";
     }
-}
+};
 
 // ---- Game function --------------------------------------------------------------------------------------<<<
 
@@ -175,55 +183,56 @@ startGame = function () {
         if (b > a) {
             $(".num2").text(a);
             $(".num1").text(b);
-        }  else {
+        } else {
             $(".num1").text(a);
             $(".num2").text(b);
         }
     } else if (operator == "÷") {
-        let d = a*b;
+        let d = a * b;
         $(".num1").text(d);
-        $(".num2").text(b); 
-    }  else {
+        $(".num2").text(b);
+    } else {
         $(".num1").text(a);
         $(".num2").text(b);
     }
 
     $(".symbol").text(operator);
-    
+
+    // ---- Calculate the correct result
+
+    var c = 0;
+
+    if (operator == "+") {
+        c = a + b;
+    } else if (operator == "-") {
+        if (b > a) {
+            c = b - a;
+        } else {
+            c = a - b;
+        }
+    } else if (operator == "x") {
+        c = a * b;
+    } else {
+        c = (a * b) / b;
+    }
+
     // ---- Take the answer
     $("#sum").submit(function (event) {
         event.preventDefault();
-        var answer = $("input[name='number']", this).val();
-        var c = 0;
-
-        // ---- Calculate the correct result
-        if (operator == "+") {
-            c = a + b;
-        } else if (operator == "-") {
-            if (b > a) {
-                c = b - a;
-            }  else {
-                c = a - b;
-            }
-        } else if (operator == "x") {
-            c = a * b;
-        } else {
-            c = (a*b) / b;
-        }
+        var answer = $(".answer", this).val();
 
         // ---- Check if answer is correct
         if (answer == c) {
             randomPraise();
             $(".result").text(feedback);
-            score++
+            score++;
 
             // ---- Show a new sum
-            setTimeout(function() {
+            setTimeout(function () {
                 $(".answer").val("");
                 $(".result").text("");
                 startGame();
             }, 800);
-
         } else {
             $(".result").text("Try Again!");
         }
@@ -252,12 +261,12 @@ randomGame = function () {
     }
 
     // Reset the difficulty if operator is a * or /
-    if (arithmetic == "x" && difficulty == "Easy" || arithmetic == "÷" && difficulty == "Easy" ) {
+    if ((arithmetic == "x" && difficulty == "Easy") || (arithmetic == "÷" && difficulty == "Easy")) {
         max = 10;
-    } else if (arithmetic == "x" && difficulty == "Medium" || arithmetic == "÷" && difficulty == "Medium" ) {
+    } else if ((arithmetic == "x" && difficulty == "Medium") || (arithmetic == "÷" && difficulty == "Medium")) {
         min = 11;
         max = 20;
-    } else if (arithmetic == "x" && difficulty == "Hard" || arithmetic == "÷" && difficulty == "Hard" ) {
+    } else if ((arithmetic == "x" && difficulty == "Hard") || (arithmetic == "÷" && difficulty == "Hard")) {
         min = 21;
         max = 40;
     }
@@ -273,15 +282,15 @@ randomGame = function () {
         if (b > a) {
             $(".num2").text(a);
             $(".num1").text(b);
-        }  else {
+        } else {
             $(".num1").text(a);
             $(".num2").text(b);
         }
     } else if (arithmetic == "÷") {
-        let d = a*b;
+        let d = a * b;
         $(".num1").text(d);
-        $(".num2").text(b); 
-    }  else {
+        $(".num2").text(b);
+    } else {
         $(".num1").text(a);
         $(".num2").text(b);
     }
@@ -298,46 +307,43 @@ randomGame = function () {
         } else if (arithmetic == "-") {
             if (b > a) {
                 c = b - a;
-            }  else {
+            } else {
                 c = a - b;
             }
         } else if (arithmetic == "x") {
             c = a * b;
         } else {
-            c = (a*b) / b;
+            c = (a * b) / b;
         }
 
         // ---- Check if answer is correct
         if (answer == c) {
             randomPraise();
             $(".result").text(feedback);
-            score++
+            score++;
 
             // ---- Show a new sum
-            setTimeout(function() {
+            setTimeout(function () {
                 $(".answer").val("");
                 $(".result").text("");
-                randomGame()
+                randomGame();
             }, 800);
-
         } else {
             $(".result").text("Try Again!");
         }
     });
 };
 
-
 // ---- Start button ----
 
-$(".go").click(function() {
-
+$(".go").click(function () {
     // Set the variables based on selected difficulty
-    if (operator == "x" && difficulty == "Easy" || operator == "÷" && difficulty == "Easy" ) {
+    if ((operator == "x" && difficulty == "Easy") || (operator == "÷" && difficulty == "Easy")) {
         max = 10;
-    } else if (operator == "x" && difficulty == "Medium" || operator == "÷" && difficulty == "Medium" ) {
+    } else if ((operator == "x" && difficulty == "Medium") || (operator == "÷" && difficulty == "Medium")) {
         min = 11;
         max = 20;
-    } else if (operator == "x" && difficulty == "Hard" || operator == "÷" && difficulty == "Hard" ) {
+    } else if ((operator == "x" && difficulty == "Hard") || (operator == "÷" && difficulty == "Hard")) {
         min = 21;
         max = 40;
     }
@@ -360,7 +366,6 @@ $(".go").click(function() {
     } else {
         $(".menu-icon").text(operator);
     }
-    
 
     // Show the sum section
     $(".equation").removeClass("hide");
@@ -385,6 +390,11 @@ $(".go").click(function() {
     } else {
         startGame();
     }
+
+    // $(".answer").focus();
+    $(".answer").focus(function () {
+        document.activeElement.blur();
+    });
 });
 
 // ---- Restart game
@@ -417,4 +427,3 @@ $(".info").click(function () {
 $(".quit").click(function () {
     location.reload();
 });
-
