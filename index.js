@@ -4,15 +4,16 @@ var min = 1;
 var max = 20;
 var answer = "";
 var result = 0;
-durationMin = 00;
-durationSec = 00;
+
 var difficulty = "Easy";
 var operator = "?";
 var feedback = "";
 var random = 0;
+
+var durationMin = 00;
+var durationSec = 00;
 var pauseMin = "";
 var pauseSec = "";
-var input = [];
 
 // ---- Numpad ----
 
@@ -21,6 +22,12 @@ var value = [];
 $(".num").click(function () {
     value.push($(this).text());
     $(".answer").val(value.join(""));
+    // Auto-submit answer
+    if (value.join("") == result) {
+        value = [];
+        console.log("Shiny!");
+        checkAnswer();
+    }
 });
 
 $(".del").click(function () {
@@ -28,9 +35,9 @@ $(".del").click(function () {
     $(".answer").val(value.join(""));
 });
 
-$(".submit").click(function () {
-    value = [];
-});
+// $(".submit").click(function () {
+//     value = [];
+// });
 
 // ---- Timer ----
 timer = function () {
