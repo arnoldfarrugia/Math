@@ -2,23 +2,25 @@
 var score = 0;
 var min = 1;
 var max = 20;
+var answer = "";
+var result = 0;
 durationMin = 00;
 durationSec = 00;
 var difficulty = "Easy";
 var operator = "?";
 var feedback = "";
-
+var random = 0;
 var pauseMin = "";
 var pauseSec = "";
+var input = [];
 
 // ---- Numpad ----
+
 var value = [];
 
 $(".num").click(function () {
     value.push($(this).text());
     $(".answer").val(value.join(""));
-    // Read numpad click
-    console.log("A number was clicked");
 });
 
 $(".del").click(function () {
@@ -28,13 +30,6 @@ $(".del").click(function () {
 
 $(".submit").click(function () {
     value = [];
-});
-
-// Read keypress
-$(document).ready(function () {
-    $(".answer").keypress(function (e) {
-        console.log("A key was pressed");
-    });
 });
 
 // ---- Timer ----
@@ -142,8 +137,6 @@ $(".edit").click(function () {
     pauseMin = $(".min").text();
     pauseSec = $(".sec").text();
 
-    console.log("min: " + pauseMin + " sec: " + pauseSec);
-
     $(".logo").removeClass("hide");
     $(".equation").addClass("hide");
     $(".full-menu").removeClass("hide");
@@ -169,10 +162,57 @@ randomPraise = function () {
     }
 };
 
+// ---- Check answer
+checkAnswer = function () {
+    randomPraise();
+    $(".result").text(feedback);
+    score++;
+
+    // ---- Show a new sum
+    setTimeout(function () {
+        $(".answer").val("");
+        $(".result").text("");
+        input = [];
+        startGame();
+    }, 800);
+};
+
+// ---- Random game function
+
+randomGame = function () {
+    // Randomly select an operator
+    var sign = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+
+    if (sign == 1) {
+        operator = "+";
+    } else if (sign == 2) {
+        operator = "-";
+    } else if (sign == 3) {
+        operator = "x";
+    } else {
+        operator = "÷";
+    }
+
+    // Reset the difficulty if operator is a * or /
+    if ((operator == "x" && difficulty == "Easy") || (operator == "÷" && difficulty == "Easy")) {
+        max = 10;
+    } else if ((operator == "x" && difficulty == "Medium") || (operator == "÷" && difficulty == "Medium")) {
+        min = 11;
+        max = 20;
+    } else if ((operator == "x" && difficulty == "Hard") || (operator == "÷" && difficulty == "Hard")) {
+        min = 21;
+        max = 40;
+    }
+};
+
 // ---- Game function --------------------------------------------------------------------------------------<<<
 
 startGame = function () {
     $(".score").text(score);
+
+    if (random == 1) {
+        randomGame();
+    }
 
     // ---- Set 2 random numbers based on difficulty chosen
     var a = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -200,134 +240,44 @@ startGame = function () {
 
     // ---- Calculate the correct result
 
-    var c = 0;
-
     if (operator == "+") {
-        c = a + b;
+        result = a + b;
     } else if (operator == "-") {
         if (b > a) {
-            c = b - a;
+            result = b - a;
         } else {
-            c = a - b;
+            result = a - b;
         }
     } else if (operator == "x") {
-        c = a * b;
+        result = a * b;
     } else {
-        c = (a * b) / b;
+        result = (a * b) / b;
     }
 
-    // ---- Take the answer
+    // ---- Auto submit result on keyboard
+
+    $(".answer").keydown(function (e) {
+        // If delete is pressed
+        if (e.which == 8) {
+            input.pop();
+        } else {
+            input.push(String.fromCharCode(e.which));
+            answer = input.join("");
+
+            if (answer == result) {
+                checkAnswer();
+            }
+        }
+    });
+
+    // ---- On clicking submit button
     $("#sum").submit(function (event) {
         event.preventDefault();
         var answer = $(".answer", this).val();
 
         // ---- Check if answer is correct
-        if (answer == c) {
-            randomPraise();
-            $(".result").text(feedback);
-            score++;
-
-            // ---- Show a new sum
-            setTimeout(function () {
-                $(".answer").val("");
-                $(".result").text("");
-                startGame();
-            }, 800);
-        } else {
-            $(".result").text("Try Again!");
-        }
-    });
-};
-
-// ---- Random game function -------------------------------------------------------------------------------<<<
-
-randomGame = function () {
-    $(".score").text(score);
-    var arithmetic = "";
-
-    // Randomly select an operator
-    if (operator == "?") {
-        var sign = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
-
-        if (sign == 1) {
-            arithmetic = "+";
-        } else if (sign == 2) {
-            arithmetic = "-";
-        } else if (sign == 3) {
-            arithmetic = "x";
-        } else {
-            arithmetic = "÷";
-        }
-    }
-
-    // Reset the difficulty if operator is a * or /
-    if ((arithmetic == "x" && difficulty == "Easy") || (arithmetic == "÷" && difficulty == "Easy")) {
-        max = 10;
-    } else if ((arithmetic == "x" && difficulty == "Medium") || (arithmetic == "÷" && difficulty == "Medium")) {
-        min = 11;
-        max = 20;
-    } else if ((arithmetic == "x" && difficulty == "Hard") || (arithmetic == "÷" && difficulty == "Hard")) {
-        min = 21;
-        max = 40;
-    }
-
-    // ---- Set 2 random numbers based on difficulty chosen
-    var a = Math.floor(Math.random() * (max - min + 1)) + min;
-    var b = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    $(".symbol").text(arithmetic);
-
-    // ---- Show random numbers on screen
-    if (arithmetic == "-") {
-        if (b > a) {
-            $(".num2").text(a);
-            $(".num1").text(b);
-        } else {
-            $(".num1").text(a);
-            $(".num2").text(b);
-        }
-    } else if (arithmetic == "÷") {
-        let d = a * b;
-        $(".num1").text(d);
-        $(".num2").text(b);
-    } else {
-        $(".num1").text(a);
-        $(".num2").text(b);
-    }
-
-    // ---- Take the answer
-    $("#sum").submit(function (event) {
-        event.preventDefault();
-        var answer = $("input[name='number']", this).val();
-        var c = 0;
-
-        // ---- Calculate the correct result
-        if (arithmetic == "+") {
-            c = a + b;
-        } else if (arithmetic == "-") {
-            if (b > a) {
-                c = b - a;
-            } else {
-                c = a - b;
-            }
-        } else if (arithmetic == "x") {
-            c = a * b;
-        } else {
-            c = (a * b) / b;
-        }
-
-        // ---- Check if answer is correct
-        if (answer == c) {
-            randomPraise();
-            $(".result").text(feedback);
-            score++;
-
-            // ---- Show a new sum
-            setTimeout(function () {
-                $(".answer").val("");
-                $(".result").text("");
-                randomGame();
-            }, 800);
+        if (answer == result) {
+            checkAnswer();
         } else {
             $(".result").text("Try Again!");
         }
@@ -386,15 +336,15 @@ $(".go").click(function () {
 
     // Check if "Random" operator was selected and start game
     if (operator == "?") {
-        randomGame();
-    } else {
-        startGame();
+        random = 1;
     }
 
-    // $(".answer").focus();
-    $(".answer").focus(function () {
-        document.activeElement.blur();
-    });
+    startGame();
+
+    $(".answer").focus();
+    // $(".answer").focus(function () {
+    //     document.activeElement.blur();
+    // });
 });
 
 // ---- Restart game
