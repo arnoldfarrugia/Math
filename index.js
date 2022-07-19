@@ -8,7 +8,7 @@ var result = 0;
 var difficulty = "Easy";
 var operator = "?";
 var feedback = "";
-var random = 0;
+var random = false;
 
 var paused = false;
 var durationMin = 00;
@@ -36,6 +36,12 @@ $(".num").click(function () {
         // If yes show "Try Again!"
         if (resLength == ansLength) {
             $(".result").text("Try Again!");
+            // Clear entry
+            setTimeout(function () {
+                $(".answer").val("");
+                $(".result").text("");
+                value = [];
+            }, 800);
         }
     }
 });
@@ -145,18 +151,35 @@ $(".duration").click(function () {
     $(this).addClass("chosen");
 });
 
-// ---- Edit settings ----
-$(".edit").click(function () {
+// ---- Edit settings // Pause----
+$(".pause").click(function () {
     paused = true;
     pauseMin = $(".min").text();
     pauseSec = $(".sec").text();
 
     $(".logo").removeClass("hide");
+    $(".resume").removeClass("hide");
+    $("h1").removeClass("hide");
+    $(".icons").removeClass("hide");
+
     $(".equation").addClass("hide");
-    $(".full-menu").removeClass("hide");
-    $(".dur-menu").addClass("hide");
     $(".numbers").addClass("hide");
     $(".min-menu").addClass("hide");
+});
+
+$(".resume").click(function () {
+    paused = false;
+    $(".sec").text(pauseSec);
+    $(".min").text(pauseMin);
+
+    $(".logo").addClass("hide");
+    $(".resume").addClass("hide");
+    $("h1").addClass("hide");
+    $(".icons").addClass("hide");
+
+    $(".equation").removeClass("hide");
+    $(".numbers").removeClass("hide");
+    $(".min-menu").removeClass("hide");
 });
 
 // ---- Random feedback generator
@@ -168,7 +191,7 @@ randomPraise = function () {
     } else if (z == 2) {
         feedback = "Oh yeah!";
     } else if (z == 3) {
-        feedback = "Very nice!";
+        feedback = "Keep it up!!";
     } else if (z == 4) {
         feedback = "Incredible!";
     } else {
@@ -186,7 +209,6 @@ checkAnswer = function () {
     setTimeout(function () {
         $(".answer").val("");
         $(".result").text("");
-        input = [];
         startGame();
     }, 800);
 };
@@ -196,6 +218,8 @@ checkAnswer = function () {
 randomGame = function () {
     // Randomly select an operator
     var sign = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+
+    console.log(sign);
 
     if (sign == 1) {
         operator = "+";
@@ -225,7 +249,9 @@ startGame = function () {
     $(".score").text(score);
     paused = false;
 
-    if (random == 1) {
+    console.log(operator);
+
+    if (random == true) {
         randomGame();
     }
 
@@ -269,32 +295,25 @@ startGame = function () {
         result = (a * b) / b;
     }
 
-    // ---- Auto submit result on keyboard
-
-    // $(".answer").keydown(function (e) {
-    //     // If delete is pressed
-    //     if (e.which == 8) {
-    //         input.pop();
-    //     } else {
-    //         input.push(String.fromCharCode(e.which));
-    //         answer = input.join("");
-
-    //         if (answer == result) {
-    //             checkAnswer();
-    //         }
-    //     }
-    // });
+    var answer = "";
 
     // ---- On clicking submit button
     $("#sum").submit(function (event) {
         event.preventDefault();
-        var answer = $(".answer", this).val();
+        answer = $(".answer", this).val();
 
         // ---- Check if answer is correct
         if (answer == result) {
+            answer = "";
             checkAnswer();
         } else {
             $(".result").text("Try Again!");
+            // Clear entry
+            setTimeout(function () {
+                $(".answer").val("");
+                $(".result").text("");
+                answer = "";
+            }, 800);
         }
     });
 };
@@ -314,7 +333,9 @@ $(".go").click(function () {
     }
 
     // Hide full-menu & show min-menu
-    $(".full-menu").addClass("hide");
+    $(".options").addClass("hide");
+    $(".icons").addClass("hide");
+    $(".go").addClass("hide");
     $(".min-menu").removeClass("hide");
     $(".quit").removeClass("hide");
 
@@ -338,20 +359,12 @@ $(".go").click(function () {
     // Show the numbers (on mobile)
     $(".numbers").removeClass("hide");
 
-    // Check if timer is running and start Timer
-    let s = $(".sec").text();
-    let m = $(".min").text();
-
-    if (s == durationSec && m == durationMin) {
-        timer();
-    } else {
-        $(".sec").text(pauseSec);
-        $(".min").text(pauseMin);
-    }
+    // Start the timer
+    timer();
 
     // Check if "Random" operator was selected and start game
     if (operator == "?") {
-        random = 1;
+        random = true;
     }
 
     startGame();

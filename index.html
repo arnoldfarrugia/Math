@@ -25,35 +25,37 @@
             </div>
 
             <div class="full-menu">
-                <div>
-                    <h3 class="choose-dif">Choose difficulty</h3>
-                    <div class="options-dif hide">
-                        <ul>
-                            <li class="green difficulty green-bg">Easy</li>
-                            <li class="yellow difficulty">Medium</li>
-                            <li class="red difficulty">Hard</li>
+                <div class="options">
+                    <div>
+                        <h3 class="choose-dif">Choose difficulty</h3>
+                        <div class="options-dif hide">
+                            <ul>
+                                <li class="green difficulty green-bg">Easy</li>
+                                <li class="yellow difficulty">Medium</li>
+                                <li class="red difficulty">Hard</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="choose-arit">Choose arithmetic</h3>
+                        <ul class="options-arit hide">
+                            <li class="operator" id="+">+</li>
+                            <li class="operator" id="-">-</li>
+                            <li class="operator" id="x">x</li>
+                            <li class="operator" id="÷">÷</li>
+                            <li class="operator chosen" id="?"><ion-icon class="shuffle" name="shuffle"></ion-icon></li>
                         </ul>
                     </div>
-                </div>
 
-                <div>
-                    <h3 class="choose-arit">Choose arithmetic</h3>
-                    <ul class="options-arit hide">
-                        <li class="operator" id="+">+</li>
-                        <li class="operator" id="-">-</li>
-                        <li class="operator" id="x">x</li>
-                        <li class="operator" id="÷">÷</li>
-                        <li class="operator chosen" id="?"><ion-icon class="shuffle" name="shuffle"></ion-icon></li>
-                    </ul>
-                </div>
-
-                <div class="dur-menu">
-                    <h3 class="choose-dur">Choose duration</h3>
-                    <ul class="options-dur hide">
-                        <li class="duration">1 min</li>
-                        <li class="duration">5 min</li>
-                        <li class="duration chosen">Unlimited</li>
-                    </ul>
+                    <div class="dur-menu">
+                        <h3 class="choose-dur">Choose duration</h3>
+                        <ul class="options-dur hide">
+                            <li class="duration">1 min</li>
+                            <li class="duration">5 min</li>
+                            <li class="duration chosen">Unlimited</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="icons">
@@ -64,11 +66,13 @@
                 <button class="go">Go</button>
             </div>
 
+            <button class="resume hide"><ion-icon name="play-outline"></ion-icon></button>
+
             <div class="min-menu hide">
                 <ul class="show">
                     <li>Difficulty:<ion-icon class="dif-col" name="ellipse"></ion-icon></li>
                     <li>Arithmetic: <span class="menu-icon"></span></li>
-                    <li class="edit"><ion-icon class="edit-icon" name="settings"></ion-icon></li>
+                    <li class="pause"><ion-icon class="pause-icon" name="pause-circle-outline"></ion-icon></li>
                 </ul>
             </div>
 

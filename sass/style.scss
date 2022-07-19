@@ -43,10 +43,6 @@ h3 {
     }
 }
 
-.full-menu {
-    margin-top: 30px;
-}
-
 .min-menu {
     max-width: 500px;
     margin: 0 auto;
@@ -89,11 +85,11 @@ h3 {
     }
 }
 
-.edit {
+.pause {
     margin-right: 25px;
 }
 
-.edit-icon {
+.pause-icon {
     font-size: 1.5em;
     position: absolute;
 
@@ -187,6 +183,25 @@ li {
 .go {
     display: block;
     margin: 50px auto;
+    background-color: $green;
+    height: 70px;
+    width: 70px;
+    border-radius: 100%;
+    font-size: 2em;
+    color: $light;
+    font-weight: 600;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $dark;
+    }
+}
+
+.resume {
+    display: block;
+    margin: 50px auto;
+    padding: 10px 0 0 5px;
     background-color: $green;
     height: 70px;
     width: 70px;
@@ -456,12 +471,13 @@ li {
 
     .go {
         margin: 30px auto;
+        font-size: 18px;
     }
 
     .about {
         .content {
             width: 250px;
-            height: 300px;
+            height: 360px;
             font-size: 1.2em;
 
             .close {
@@ -479,7 +495,6 @@ li {
     }
 
     .numbers {
-        margin: 0 auto;
         position: absolute;
         bottom: 0;
 
