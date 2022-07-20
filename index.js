@@ -51,6 +51,66 @@ $(".del").click(function () {
     $(".answer").val(value.join(""));
 });
 
+// Keyboard input
+
+$(".answer").keydown(function (event) {
+    var key = event.which;
+    var numkey = String.fromCharCode(event.which);
+
+    // Check if input is a number
+    if ($.isNumeric(numkey)) {
+        value.push(numkey);
+        var input = value.join("");
+        // If not inform player
+    } else if (key == 8) {
+        value.pop();
+        $(".answer").val(value.join(""));
+    } else {
+        $(".result").text("Invalid input!");
+    }
+
+    // Auto-submit answer
+    if (input == result) {
+        value = [];
+        checkAnswer();
+        // If answer is wrong
+    } else {
+        // Check if the number of digits entered are the same as the answer
+        resLength = result.toString().length;
+        ansLength = input.length;
+        // If yes show "Try Again!"
+        if (resLength == ansLength) {
+            $(".result").text("Try Again!");
+            // Clear entry
+            setTimeout(function () {
+                $(".answer").val("");
+                $(".result").text("");
+                value = [];
+            }, 800);
+        }
+    }
+});
+
+// ---- On clicking submit button
+// $("#sum").submit(function (event) {
+//     event.preventDefault();
+//     answer = $(".answer", this).val();
+
+//     // ---- Check if answer is correct
+//     if (answer == result) {
+//         answer = "";
+//         checkAnswer();
+//     } else {
+//         $(".result").text("Try Again!");
+//         // Clear entry
+//         setTimeout(function () {
+//             $(".answer").val("");
+//             $(".result").text("");
+//             answer = "";
+//         }, 800);
+//     }
+// });
+
 // ---- Timer ----
 timer = function () {
     setInterval(updateDisplay, 1000); // every second call updateDisplay
@@ -219,8 +279,6 @@ randomGame = function () {
     // Randomly select an operator
     var sign = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
 
-    console.log(sign);
-
     if (sign == 1) {
         operator = "+";
     } else if (sign == 2) {
@@ -248,8 +306,6 @@ randomGame = function () {
 startGame = function () {
     $(".score").text(score);
     paused = false;
-
-    console.log(operator);
 
     if (random == true) {
         randomGame();
@@ -294,28 +350,6 @@ startGame = function () {
     } else {
         result = (a * b) / b;
     }
-
-    var answer = "";
-
-    // ---- On clicking submit button
-    $("#sum").submit(function (event) {
-        event.preventDefault();
-        answer = $(".answer", this).val();
-
-        // ---- Check if answer is correct
-        if (answer == result) {
-            answer = "";
-            checkAnswer();
-        } else {
-            $(".result").text("Try Again!");
-            // Clear entry
-            setTimeout(function () {
-                $(".answer").val("");
-                $(".result").text("");
-                answer = "";
-            }, 800);
-        }
-    });
 };
 
 // ---- Start button ----
