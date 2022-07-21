@@ -1,5 +1,6 @@
 // ---- Variables
 var score = 0;
+var wrongAns = 0;
 var min = 1;
 var max = 20;
 var answer = "";
@@ -11,6 +12,7 @@ var feedback = "";
 var random = false;
 
 var paused = false;
+var time = "";
 var durationMin = 00;
 var durationSec = 00;
 var pauseMin = "";
@@ -36,6 +38,7 @@ $(".num").click(function () {
         // If yes show "Try Again!"
         if (resLength == ansLength) {
             $(".result").text("Try Again!");
+            wrongAns++;
             // Clear entry
             setTimeout(function () {
                 $(".answer").val("");
@@ -81,6 +84,7 @@ $(".answer").keydown(function (event) {
         // If yes show "Try Again!"
         if (resLength == ansLength) {
             $(".result").text("Try Again!");
+            wrongAns++;
             // Clear entry
             setTimeout(function () {
                 $(".answer").val("");
@@ -90,26 +94,6 @@ $(".answer").keydown(function (event) {
         }
     }
 });
-
-// ---- On clicking submit button
-// $("#sum").submit(function (event) {
-//     event.preventDefault();
-//     answer = $(".answer", this).val();
-
-//     // ---- Check if answer is correct
-//     if (answer == result) {
-//         answer = "";
-//         checkAnswer();
-//     } else {
-//         $(".result").text("Try Again!");
-//         // Clear entry
-//         setTimeout(function () {
-//             $(".answer").val("");
-//             $(".result").text("");
-//             answer = "";
-//         }, 800);
-//     }
-// });
 
 // ---- Timer ----
 timer = function () {
@@ -128,11 +112,7 @@ timer = function () {
                 $(".sec").text("59");
                 $(".min").text(minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
             } else if (seconds == 00 && minutes == 00 && paused == false) {
-                $(".equation").addClass("hide");
-                $(".min-menu").addClass("hide");
-                $(".numbers").addClass("hide");
-                $(".review").removeClass("hide");
-                $(".final-score").text(score);
+                gameEnd();
             }
         } else {
             seconds++;
@@ -146,6 +126,36 @@ timer = function () {
         }
     }
 };
+
+// Game End (Timer runs out)
+function gameEnd() {
+    $(".logo").removeClass("hide");
+    $(".icons").removeClass("hide");
+
+    $(".equation").addClass("hide");
+    $(".min-menu").addClass("hide");
+    $(".numbers").addClass("hide");
+
+    $(".review").removeClass("hide");
+    $(".final-score").text(score);
+
+    // ---- Restart game
+
+    $(".restart").click(function () {
+        $(".logo").addClass("hide");
+        $(".icons").addClass("hide");
+
+        $(".equation").removeClass("hide");
+        $(".min-menu").removeClass("hide");
+        $(".numbers").removeClass("hide");
+
+        $(".review").addClass("hide");
+        $(".score").text("0");
+        score = 0;
+
+        setTimer();
+    });
+}
 
 // ---- Menu ----
 $(".choose-dif").click(function () {
@@ -194,22 +204,26 @@ $(".operator").click(function () {
 
 // Choose duration
 $(".duration").click(function () {
-    var time = $(this).text();
+    time = $(this).text();
+    setTimer();
+
+    $(".duration").removeClass("chosen");
+    $(this).addClass("chosen");
+});
+
+function setTimer() {
     if (time == "1 min") {
         durationMin = 00;
         durationSec = 59;
         $(".min").text("00");
         $(".sec").text("59");
     } else if (time == "5 min") {
-        durationMin = 05;
+        durationMin = 04;
         durationSec = 59;
-        $(".min").text("05");
+        $(".min").text("04");
         $(".sec").text("59");
     }
-
-    $(".duration").removeClass("chosen");
-    $(this).addClass("chosen");
-});
+}
 
 // ---- Edit settings // Pause----
 $(".pause").click(function () {
@@ -412,12 +426,6 @@ $(".go").click(function () {
     } else {
         $(".answer").focus();
     }
-});
-
-// ---- Restart game
-
-$(".restart").click(function () {
-    location.reload();
 });
 
 // ---- Show Lightbox - ABOUT

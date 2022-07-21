@@ -392,8 +392,6 @@ li {
         top: 20%;
         left: 50%;
         transform: translate(-50%);
-        width: 400px;
-        height: 250px;
         padding: 20px;
         background-color: $light;
         border-radius: 30px;
@@ -472,9 +470,9 @@ li {
 
     .about {
         .content {
-            width: 250px;
-            height: 360px;
-            font-size: 1.2em;
+            min-width: 250px;
+            margin: 2px;
+            font-size: 15px;
 
             .close {
                 top: -55;
