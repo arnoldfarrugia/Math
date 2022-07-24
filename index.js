@@ -2,6 +2,8 @@
 var score = 0;
 var wrongAns = 0;
 var perfFeedback = 0;
+var prevA = 0;
+var prevB = 0;
 var a = 0;
 var b = 0;
 var min = 1;
@@ -389,6 +391,17 @@ randomGame = function () {
     }
 };
 
+function randomNumbers() {
+    // ---- Set 2 random numbers based on difficulty chosen
+    if ((operator == "x" && difficulty == "Medium") || (operator == "÷" && difficulty == "Medium")) {
+        a = Math.floor(Math.random() * (max - min + 1)) + min;
+        b = Math.floor(Math.random() * (maxA - minA + 1)) + minA;
+    } else {
+        a = Math.floor(Math.random() * (max - min + 1)) + min;
+        b = Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+}
+
 // ---- Game function --------------------------------------------------------------------------------------<<<
 
 startGame = function () {
@@ -398,18 +411,14 @@ startGame = function () {
     if (random == true) {
         randomGame();
     }
-
-    // ---- Set 2 random numbers based on difficulty chosen
-    if ((operator == "x" && difficulty == "Medium") || (operator == "÷" && difficulty == "Medium")) {
-        a = Math.floor(Math.random() * (max - min + 1)) + min;
-        b = Math.floor(Math.random() * (maxA - minA + 1)) + minA;
-        console.log("Min A: " + minA + " Max A: " + maxA);
-        console.log("Min: " + min + " Max: " + max);
-        console.log("A: " + a + " B: " + b);
+    // Get random numbers
+    randomNumbers();
+    // Check if numbers have just been shown
+    if (prevA == a && prevB == b) {
+        randomNumbers();
     } else {
-        a = Math.floor(Math.random() * (max - min + 1)) + min;
-        b = Math.floor(Math.random() * (max - min + 1)) + min;
-        console.log("Min: " + min + " Max: " + max);
+        prevA = a;
+        prevB = b;
     }
 
     // ---- Show random numbers on screen
