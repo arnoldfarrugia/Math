@@ -144,6 +144,7 @@ function gameEnd() {
     $(".numbers").addClass("hide");
 
     $(".review").removeClass("hide");
+    $(".dif-level").text(difficulty);
     $(".final-score").text(perfFeedback);
 
     // ---- Restart game
@@ -155,8 +156,8 @@ function gameEnd() {
         $(".equation").removeClass("hide");
         $(".min-menu").removeClass("hide");
         $(".numbers").removeClass("hide");
-
         $(".review").addClass("hide");
+
         $(".score").text("0");
         score = 0;
         wrongAns = 0;
