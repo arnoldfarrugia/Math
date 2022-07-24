@@ -301,6 +301,27 @@ li {
         color: $green;
         font-weight: 600;
     }
+
+    .feedback {
+        font-size: 1.5em;
+        font-weight: 600;
+    }
+
+    .star {
+        border: 2px solid $yellow;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+    }
+}
+
+.s1.fill,
+.s2.fill,
+.s3.fill,
+.s4.fill,
+.s5.fill {
+    background-color: $yellow;
 }
 
 .restart {

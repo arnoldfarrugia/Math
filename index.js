@@ -1,8 +1,13 @@
 // ---- Variables
 var score = 0;
 var wrongAns = 0;
+var perfFeedback = 0;
+var a = 0;
+var b = 0;
 var min = 1;
 var max = 20;
+var minA = 0;
+var maxA = 0;
 var answer = "";
 var result = 0;
 
@@ -129,6 +134,8 @@ timer = function () {
 
 // Game End (Timer runs out)
 function gameEnd() {
+    perfScore();
+
     $(".logo").removeClass("hide");
     $(".icons").removeClass("hide");
 
@@ -137,7 +144,7 @@ function gameEnd() {
     $(".numbers").addClass("hide");
 
     $(".review").removeClass("hide");
-    $(".final-score").text(score);
+    $(".final-score").text(perfFeedback);
 
     // ---- Restart game
 
@@ -152,9 +159,73 @@ function gameEnd() {
         $(".review").addClass("hide");
         $(".score").text("0");
         score = 0;
+        wrongAns = 0;
 
+        startGame();
         setTimer();
     });
+}
+
+// Performance score
+
+function perfScore() {
+    var calcEasy = 25;
+    var calcMedium = 12;
+    var calcHard = 6;
+
+    if (time == "5 min") {
+        calcEasy = 25 * 5;
+        calcMedium = 12 * 5;
+        calcHard = 6 * 5;
+    }
+
+    if (difficulty == "Easy") {
+        perfFeedback = Math.round((score / calcEasy) * 100 - (wrongAns / calcEasy) * 100);
+    } else if (difficulty == "Medium") {
+        perfFeedback = Math.round((score / calcMedium) * 100 - (wrongAns / calcMedium) * 100);
+    } else if (difficulty == "Hard") {
+        perfFeedback = Math.round((score / calcHard) * 100 - (wrongAns / calcHard) * 100);
+    }
+
+    if (perfFeedback < 1) {
+        perfFeedback = 0;
+    }
+
+    if (perfFeedback <= 10) {
+        $(".feedback").text("Practice makes perfect!");
+    } else if (perfFeedback > 10 && perfFeedback < 20) {
+        $(".feedback").text("Better luck next time!");
+        $(".s1").addClass("fill");
+    } else if (perfFeedback >= 20 && perfFeedback < 40) {
+        $(".feedback").text("");
+        $(".s1").addClass("fill");
+        $(".s2").addClass("fill");
+    } else if (perfFeedback >= 40 && perfFeedback < 60) {
+        $(".feedback").text("Well done!");
+        $(".s1").addClass("fill");
+        $(".s2").addClass("fill");
+        $(".s3").addClass("fill");
+    } else if (perfFeedback >= 60 && perfFeedback < 80) {
+        $(".feedback").text("That was great!");
+        $(".s1").addClass("fill");
+        $(".s2").addClass("fill");
+        $(".s3").addClass("fill");
+        $(".s4").addClass("fill");
+    } else if (perfFeedback >= 80 && perfFeedback < 100) {
+        $(".feedback").text("That's Amazing! Well done!");
+        $(".s1").addClass("fill");
+        $(".s2").addClass("fill");
+        $(".s3").addClass("fill");
+        $(".s4").addClass("fill");
+        $(".s5").addClass("fill");
+    } else {
+        $(".feedback").text("Exceptional! You're a Math Ninja!");
+        $(".s1").addClass("fill");
+        $(".s2").addClass("fill");
+        $(".s3").addClass("fill");
+        $(".s4").addClass("fill");
+        $(".s5").addClass("fill");
+    }
 }
 
 // ---- Menu ----
@@ -184,14 +255,14 @@ $(".difficulty").click(function () {
         $(".green").removeClass("green-bg");
         $(".yellow").addClass("yellow-bg");
         $(".red").removeClass("red-bg");
-        min = 21;
-        max = 40;
+        min = 51;
+        max = 100;
     } else {
         $(".green").removeClass("green-bg");
         $(".yellow").removeClass("yellow-bg");
         $(".red").addClass("red-bg");
-        min = 41;
-        max = 99;
+        min = 101;
+        max = 299;
     }
 });
 
@@ -307,11 +378,13 @@ randomGame = function () {
     if ((operator == "x" && difficulty == "Easy") || (operator == "÷" && difficulty == "Easy")) {
         max = 10;
     } else if ((operator == "x" && difficulty == "Medium") || (operator == "÷" && difficulty == "Medium")) {
+        minA = 2;
+        maxA = 9;
         min = 11;
-        max = 20;
+        max = 39;
     } else if ((operator == "x" && difficulty == "Hard") || (operator == "÷" && difficulty == "Hard")) {
-        min = 21;
-        max = 40;
+        min = 40;
+        max = 69;
     }
 };
 
@@ -326,8 +399,17 @@ startGame = function () {
     }
 
     // ---- Set 2 random numbers based on difficulty chosen
-    var a = Math.floor(Math.random() * (max - min + 1)) + min;
-    var b = Math.floor(Math.random() * (max - min + 1)) + min;
+    if ((operator == "x" && difficulty == "Medium") || (operator == "÷" && difficulty == "Medium")) {
+        a = Math.floor(Math.random() * (max - min + 1)) + min;
+        b = Math.floor(Math.random() * (maxA - minA + 1)) + minA;
+        console.log("Min A: " + minA + " Max A: " + maxA);
+        console.log("Min: " + min + " Max: " + max);
+        console.log("A: " + a + " B: " + b);
+    } else {
+        a = Math.floor(Math.random() * (max - min + 1)) + min;
+        b = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log("Min: " + min + " Max: " + max);
+    }
 
     // ---- Show random numbers on screen
     if (operator == "-") {
@@ -339,7 +421,7 @@ startGame = function () {
             $(".num2").text(b);
         }
     } else if (operator == "÷") {
-        let d = a * b;
+        let d = Math.floor(a / 2) * b;
         $(".num1").text(d);
         $(".num2").text(b);
     } else {
@@ -362,7 +444,7 @@ startGame = function () {
     } else if (operator == "x") {
         result = a * b;
     } else {
-        result = (a * b) / b;
+        result = Math.floor(a / 2);
     }
 };
 
@@ -371,13 +453,16 @@ startGame = function () {
 $(".go").click(function () {
     // Set the variables based on selected difficulty
     if ((operator == "x" && difficulty == "Easy") || (operator == "÷" && difficulty == "Easy")) {
+        min = 1;
         max = 10;
     } else if ((operator == "x" && difficulty == "Medium") || (operator == "÷" && difficulty == "Medium")) {
+        minA = 2;
+        maxA = 9;
         min = 11;
         max = 20;
     } else if ((operator == "x" && difficulty == "Hard") || (operator == "÷" && difficulty == "Hard")) {
-        min = 21;
-        max = 40;
+        min = 11;
+        max = 39;
     }
 
     // Hide full-menu & show min-menu
