@@ -164,6 +164,8 @@ function gameEnd() {
         score = 0;
         wrongAns = 0;
 
+        $(".answer").focus();
+
         startGame();
         setTimer();
     });
@@ -200,7 +202,7 @@ function perfScore() {
         $(".feedback").text("Better luck next time!");
         $(".s1").addClass("fill");
     } else if (perfFeedback >= 20 && perfFeedback < 40) {
-        $(".feedback").text("");
+        $(".feedback").text("Getting there!");
         $(".s1").addClass("fill");
         $(".s2").addClass("fill");
     } else if (perfFeedback >= 40 && perfFeedback < 60) {
@@ -228,6 +230,14 @@ function perfScore() {
         $(".s3").addClass("fill");
         $(".s4").addClass("fill");
         $(".s5").addClass("fill");
+    }
+
+    if (perfFeedback < 80 && wrongAns <= 3) {
+        $(".improve").text("Improve your speed");
+    } else if (perfFeedback < 80 && wrongAns > 3 && wrongAns < 7) {
+        $(".improve").text("Practice daily for better results");
+    } else if (perfFeedback < 80 && wrongAns >= 7) {
+        $(".improve").text("Too many wrong answers");
     }
 }
 
@@ -299,11 +309,24 @@ function setTimer() {
     }
 }
 
-// ---- Edit settings // Pause----
+// ---- Pause Menu----
 $(".pause").click(function () {
     paused = true;
     pauseMin = $(".min").text();
     pauseSec = $(".sec").text();
+
+    console.log("time:" + time);
+
+    if (time == "") {
+        $(".time-txt").text("Time: ");
+    } else {
+        $(".time-txt").text("Time left: ");
+    }
+
+    $(".pause-feedback").removeClass("hide");
+    $(".wrong").text(wrongAns);
+    $(".correct").text(score);
+    $(".time").text(pauseMin + "min " + pauseSec + "sec");
 
     $(".logo").removeClass("hide");
     $(".resume").removeClass("hide");
@@ -320,6 +343,8 @@ $(".resume").click(function () {
     $(".sec").text(pauseSec);
     $(".min").text(pauseMin);
 
+    $(".pause-feedback").addClass("hide");
+
     $(".logo").addClass("hide");
     $(".resume").addClass("hide");
     $("h1").addClass("hide");
@@ -328,6 +353,8 @@ $(".resume").click(function () {
     $(".equation").removeClass("hide");
     $(".numbers").removeClass("hide");
     $(".min-menu").removeClass("hide");
+
+    $(".answer").focus();
 });
 
 // ---- Random feedback generator
